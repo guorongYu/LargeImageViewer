@@ -1,0 +1,12 @@
+LIBRARY
+EXPORTS
+   OnLoad
+   OpenConsole
+   CloseConsole
+   GetLayer0Width
+   GetLayer0Height
+   NumbefOfLayers
+   GetLayerWidth
+   GetLayerHeight
+   GetLayerBufferPitch
+   GetLayerData
