@@ -1,0 +1,11 @@
+﻿<Window x:Class="ImageViewer.DetailView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DetailView" Height="1080" Width="1920" ResizeMode="NoResize">
+    <Grid>
+        <Grid x:Name="ImageContainer" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Image Name="Image"/>
+        </Grid>
+
+    </Grid>
+</Window>

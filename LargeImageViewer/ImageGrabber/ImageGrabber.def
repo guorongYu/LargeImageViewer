@@ -10,3 +10,4 @@ EXPORTS
    GetLayerHeight
    GetLayerBufferPitch
    GetLayerData
+   GetLayerDataOfRegion

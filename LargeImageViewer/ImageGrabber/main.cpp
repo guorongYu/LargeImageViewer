@@ -124,8 +124,24 @@ __declspec(dllexport) void* __stdcall GetLayerData(unsigned char* dst, int index
 {
     if (dst == nullptr)
         global::layers[index];
-    printf("%d\n", global::layers[index][74999]);
     memmove(dst, global::layers[index], GetLayerBufferPitch(index));
+    return global::layers[index];
+}
+
+__declspec(dllexport) void* __stdcall GetLayerDataOfRegion(unsigned char* dst, int index, int left, int top, int right, int bottom)
+{
+    if (dst == nullptr)
+        global::layers[index];
+    int width = right - left;
+    int height = bottom - top;
+    printf("(%d, %d) (%d, %d) %d x %d\n", left, top, right, bottom, width, height);
+    int layer_width = GetLayerWidth(index);
+    int offset = (layer_width * top) + left;
+    for (int i = 0; i < height; ++i)
+    {
+        memmove(dst + (i * width), &(global::layers[index][0]) + offset, width);
+        offset += layer_width;
+    }
     return global::layers[index];
 }
 

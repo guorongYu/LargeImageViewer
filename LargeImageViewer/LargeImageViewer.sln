@@ -49,6 +49,7 @@ Global
 		{D02FAF54-CA50-4980-9F9A-8C8BE8C7E493}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D02FAF54-CA50-4980-9F9A-8C8BE8C7E493}.Release|Win32.ActiveCfg = Release|Any CPU
 		{D02FAF54-CA50-4980-9F9A-8C8BE8C7E493}.Release|x64.ActiveCfg = Release|Any CPU
+		{D02FAF54-CA50-4980-9F9A-8C8BE8C7E493}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
