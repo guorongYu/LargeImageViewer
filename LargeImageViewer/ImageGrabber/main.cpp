@@ -2,6 +2,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include "Delegate.h"
 #include "ExportFunctions.h"
 
 //using namespace cv;
@@ -66,18 +67,26 @@ void CVMatToByteArray(unsigned char* dst, cv::Mat& src)
             dst[i*src.cols + j] = src.at<unsigned char>(i, j);
 }
 
+typedef vee::Delegate < vee::NOTHREADING, void, int > callback_type;
 struct global
 {
     static int numLayers;
     static int layer0_width;
     static int layer0_height;
     static unsigned char** layers;
+    static callback_type update;
 };
 
 unsigned char** global::layers = nullptr;
 int global::layer0_width = 0;
 int global::layer0_height = 0;
 int global::numLayers = 0;
+callback_type global::update;
+
+__declspec(dllexport) void __stdcall AddUpdateCallback(callback_type::funcptr_type f)
+{
+    global::update += f;
+}
 
 __declspec(dllexport) int __stdcall GetLayer0Width()
 {
@@ -142,6 +151,7 @@ __declspec(dllexport) void* __stdcall GetLayerDataOfRegion(unsigned char* dst, i
         memmove(dst + (i * width), &(global::layers[index][0]) + offset, width);
         offset += layer_width;
     }
+    global::update(1);
     return global::layers[index];
 }
 

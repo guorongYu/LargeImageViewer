@@ -9,6 +9,7 @@ namespace ImageViewer
 {
     public static class ImageGrabber
     {
+        public delegate void CallbackDelegate(int arg);
         [DllImport("ImageGrabber.dll", CallingConvention = CallingConvention.StdCall)]
         public static extern int OnLoad();
         [DllImport("ImageGrabber.dll", CallingConvention = CallingConvention.StdCall)]
@@ -25,5 +26,7 @@ namespace ImageViewer
         public static extern bool OpenConsole();
         [DllImport("ImageGrabber.dll", CallingConvention = CallingConvention.StdCall)]
         public static extern bool CloseConsole();
+        [DllImport("ImageGrabber.dll", CallingConvention = CallingConvention.StdCall)]
+        public static extern void AddUpdateCallback(CallbackDelegate cbFunction);
     }
 }

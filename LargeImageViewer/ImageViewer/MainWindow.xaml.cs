@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 using System.IO;
+using System.Windows.Threading;
 
 namespace ImageViewer
 {    
@@ -22,14 +23,30 @@ namespace ImageViewer
     /// </summary>
     public partial class MainWindow : Window
     {
+        public void OnUpdateCallback(int arg)
+        {
+            Application.Current.Dispatcher.BeginInvoke(
+                DispatcherPriority.Background, new Action(
+            delegate()
+            {
+                UpdateDisplayContent();
+            }));
+        }
+
+        private void UpdateDisplayContent()
+        {
+            int display_layer = 3;
+            ImageControl.Source = Utility.MakeBitmapSourceFromLayer(display_layer);
+        }
+
         public MainWindow()
         {
             InitializeComponent();
             ImageGrabber.OpenConsole();
             ImageGrabber.OnLoad();
-
-            int display_layer = 3;
-            ImageControl.Source = Utility.MakeBitmapSourceFromLayer(display_layer);
+            Global.callback_delegate = new ImageGrabber.CallbackDelegate(OnUpdateCallback);
+            ImageGrabber.AddUpdateCallback(Global.callback_delegate);
+            UpdateDisplayContent();
             int width = ImageGrabber.GetLayerWidth(0);
             int height = ImageGrabber.GetLayerHeight(0);
             Global.currentImage.width = width;

@@ -65,6 +65,7 @@ namespace ImageViewer
 
     public static class Global
     {
+        public static ImageGrabber.CallbackDelegate callback_delegate = null;
         public static Point beginCursorPos = new Point();
         //public static Point beginDragBoxPos;
         public static bool isSelectAreaResizing = false;

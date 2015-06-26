@@ -176,7 +176,9 @@
     <None Include="ImageGrabber.def" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Delegate.h" />
     <ClInclude Include="ExportFunctions.h" />
+    <ClInclude Include="Threading.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
